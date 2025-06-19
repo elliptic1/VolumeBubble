@@ -33,6 +33,8 @@
     <string name="this_app_requires_permission_to_draw_over_other_apps">This app requires permission to draw over other apps.</string>
     <string name="request_permission">Request Permission</string>
     <string name="add_bubble">Add Bubble</string>
+    <string name="overlay_permission_title">Permission Required</string>
+    <string name="overlay_permission_rationale">This app requires permission to draw over other apps in order to display the bubble.</string>
     <string name="volume_bubble">volume bubble</string>
     <string name="volume_bubble_trash_icon">Volume bubble trash icon</string>
 </resources>

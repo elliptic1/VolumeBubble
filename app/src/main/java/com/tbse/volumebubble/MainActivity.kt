@@ -35,6 +35,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.tbse.volumebubble.R.layout.*
@@ -63,10 +64,6 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
         setContentView(activity_main)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
-            requestOverlayPermission()
-        }
 
     }
 
@@ -97,10 +94,21 @@ class MainActivity : AppCompatActivity() {
     private fun noPermissions() {
         activityMainBinding.needPerms.visibility = View.VISIBLE
         activityMainBinding.about.visibility = View.GONE
-        activityMainBinding.add.text = getString(R.string.request_permission)
+        activityMainBinding.add.text = getString(R.string.add_bubble)
         activityMainBinding.add.setOnClickListener {
-            requestOverlayPermission()
+            showPermissionDialog()
         }
+    }
+
+    private fun showPermissionDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.overlay_permission_title)
+            .setMessage(R.string.overlay_permission_rationale)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                requestOverlayPermission()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     @TargetApi(Build.VERSION_CODES.M)
