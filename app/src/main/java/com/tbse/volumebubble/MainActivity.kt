@@ -142,7 +142,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeBubblesManager() {
-        bubblesManager = BubblesManager.Builder(this)
+        // Use the application context so the bubble doesn't disappear when the
+        // activity is recreated or closed
+        bubblesManager = BubblesManager.Builder(applicationContext)
             .setTrashLayout(bubble_trash_layout)
             .build()
         bubblesManager?.initialize()
