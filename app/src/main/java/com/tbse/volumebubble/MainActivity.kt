@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var bubbleLayoutBinding: BubbleLayoutBinding
 
+    companion object {
+        private const val REQUEST_OVERLAY_PERMISSION = 101
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
         setContentView(activity_main)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            requestOverlayPermission()
+        }
 
     }
 
@@ -91,17 +99,22 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.about.visibility = View.GONE
         activityMainBinding.add.text = getString(R.string.request_permission)
         activityMainBinding.add.setOnClickListener {
-            val myIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-            myIntent.data = Uri.parse("package:" + packageName)
-            startActivityForResult(myIntent, 101)
+            requestOverlayPermission()
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun requestOverlayPermission() {
+        val myIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+        myIntent.data = Uri.parse("package:" + packageName)
+        startActivityForResult(myIntent, REQUEST_OVERLAY_PERMISSION)
     }
 
     @Deprecated("Deprecated in Java")
     @SuppressLint("NewApi")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && Settings.canDrawOverlays(this)) {
+        if (requestCode == REQUEST_OVERLAY_PERMISSION && Settings.canDrawOverlays(this)) {
             hasPermissions()
         } else {
             noPermissions()
