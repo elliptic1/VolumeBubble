@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205571976357",
+    "project_id": "volume-bubble",
+    "storage_bucket": "volume-bubble.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205571976357:android:1554fe7c62c3c4d403714c",
+        "android_client_info": {
+          "package_name": "com.tbse.volumebubble"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNNIccpytCnxy_OdTa0CZOGHtuv1LNb6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
