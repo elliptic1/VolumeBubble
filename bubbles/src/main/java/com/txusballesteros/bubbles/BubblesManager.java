@@ -83,7 +83,10 @@ public class BubblesManager {
         private BubblesManager bubblesManager;
 
         public Builder(Context context) {
-            this.bubblesManager = getInstance(context);
+            // Use the application context so the service survives activity
+            // recreation and the bubble persists until explicitly removed
+            Context appContext = context.getApplicationContext();
+            this.bubblesManager = getInstance(appContext);
         }
 
         public Builder setTrashLayout(int trashLayoutResourceId) {
