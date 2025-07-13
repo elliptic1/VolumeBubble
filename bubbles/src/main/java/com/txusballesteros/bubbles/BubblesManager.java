@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.Build;
 
 public class BubblesManager {
     private static BubblesManager INSTANCE;
@@ -68,7 +69,13 @@ public class BubblesManager {
     }
 
     public void initialize() {
-        context.bindService(new Intent(context, BubblesService.class),
+        Intent intent = new Intent(context, BubblesService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(intent);
+        } else {
+            context.startService(intent);
+        }
+        context.bindService(intent,
                 bubbleServiceConnection,
                 Context.BIND_AUTO_CREATE);
     }

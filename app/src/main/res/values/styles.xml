@@ -24,7 +24,7 @@
 -->
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Dialog" />
+    <style name="AppTheme" parent="Theme.Material3.DayNight.Dialog" />
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

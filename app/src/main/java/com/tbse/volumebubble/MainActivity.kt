@@ -37,6 +37,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.FirebaseApp
 import com.tbse.volumebubble.R.layout.*
 import com.tbse.volumebubble.databinding.ActivityMainBinding
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.add.text = getString(R.string.add_bubble)
         activityMainBinding.add.visibility = View.VISIBLE
         activityMainBinding.add.setOnClickListener { addNewBubble() }
-        activityMainBinding.about.setOnClickListener { startActivity(Intent(this, About::class.java)) }
+        activityMainBinding.about.setOnClickListener { showAboutDialog() }
         initializeBubblesManager()
     }
 
@@ -108,6 +109,15 @@ class MainActivity : AppCompatActivity() {
                 requestOverlayPermission()
             }
             .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun showAboutDialog() {
+        val view = layoutInflater.inflate(R.layout.content_about, null)
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.title_activity_about)
+            .setView(view)
+            .setPositiveButton(android.R.string.ok, null)
             .show()
     }
 

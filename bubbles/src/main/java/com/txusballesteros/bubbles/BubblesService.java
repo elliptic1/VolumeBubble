@@ -25,6 +25,9 @@
 package com.txusballesteros.bubbles;
 
 import android.app.Service;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Binder;
@@ -36,7 +39,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
+import androidx.core.app.NotificationCompat;
+import com.txusballesteros.bubbles.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +51,23 @@ public class BubblesService extends Service {
     private BubbleTrashLayout bubblesTrash;
     private WindowManager windowManager;
     private BubblesLayoutCoordinator layoutCoordinator;
+
+    private static final String CHANNEL_ID = "bubble_service";
+    private static final int NOTIFICATION_ID = 42;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        createNotificationChannel();
+        String title = getApplicationInfo().loadLabel(getPackageManager()).toString();
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(getString(R.string.bubble_service_running))
+                .setSmallIcon(getApplicationInfo().icon)
+                .setOngoing(true)
+                .build();
+        startForeground(NOTIFICATION_ID, notification);
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -158,6 +179,19 @@ public class BubblesService extends Service {
     public class BubblesServiceBinder extends Binder {
         public BubblesService getService() {
             return BubblesService.this;
+        }
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Bubble Service",
+                    NotificationManager.IMPORTANCE_LOW);
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
         }
     }
 }
