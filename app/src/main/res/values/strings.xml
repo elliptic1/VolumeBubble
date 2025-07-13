@@ -37,4 +37,5 @@
     <string name="overlay_permission_rationale">This app requires permission to draw over other apps in order to display the bubble.</string>
     <string name="volume_bubble">volume bubble</string>
     <string name="volume_bubble_trash_icon">Volume bubble trash icon</string>
+    <string name="bubble_service_running">Volume bubble service running</string>
 </resources>

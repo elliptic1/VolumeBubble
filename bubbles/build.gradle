@@ -20,7 +20,10 @@ android {
     namespace 'com.txusballesteros.bubbles'
 }
 
-dependencies { implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version" }
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core:1.12.0'
+}
 
 repositories {
     mavenCentral()
