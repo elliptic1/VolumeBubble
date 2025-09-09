@@ -86,6 +86,12 @@ public class BubblesManager {
         }
     }
 
+    public void removeBubble(BubbleLayout bubble) {
+        if (bounded) {
+            bubblesService.removeBubble(bubble);
+        }
+    }
+
     public static class Builder {
         private BubblesManager bubblesManager;
 
