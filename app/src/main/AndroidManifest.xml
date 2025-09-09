@@ -47,6 +47,11 @@
             android:name="com.tbse.volumebubble.About"
             android:label="@string/title_activity_about" />
 
+        <activity
+            android:name="com.tbse.volumebubble.GameActivity"
+            android:label="@string/title_activity_game"
+            android:exported="false" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="3a25ffae919932b802608eb23c284a980ce20d04" />

@@ -114,11 +114,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun showAboutDialog() {
         val view = layoutInflater.inflate(R.layout.content_about, null)
-        MaterialAlertDialogBuilder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.title_activity_about)
             .setView(view)
             .setPositiveButton(android.R.string.ok, null)
-            .show()
+            .create()
+        view.findViewById<com.google.android.material.button.MaterialButton>(R.id.play_game_button)
+            .setOnClickListener {
+                startActivity(Intent(this, GameActivity::class.java))
+                dialog.dismiss()
+            }
+        dialog.show()
     }
 
     @TargetApi(Build.VERSION_CODES.M)

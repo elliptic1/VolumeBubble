@@ -38,4 +38,6 @@
     <string name="volume_bubble">volume bubble</string>
     <string name="volume_bubble_trash_icon">Volume bubble trash icon</string>
     <string name="bubble_service_running">Volume bubble service running</string>
+    <string name="play_game">Play a Game</string>
+    <string name="title_activity_game">Bubble Game</string>
 </resources>

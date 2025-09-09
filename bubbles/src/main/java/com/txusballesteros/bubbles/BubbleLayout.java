@@ -199,6 +199,20 @@ public class BubbleLayout extends BubbleBaseLayout {
         windowManager.updateViewLayout(this, getViewParams());
     }
 
+    public void setPosition(int x, int y) {
+        getViewParams().x = x;
+        getViewParams().y = y;
+        windowManager.updateViewLayout(this, getViewParams());
+    }
+
+    public int getPositionX() {
+        return getViewParams().x;
+    }
+
+    public int getPositionY() {
+        return getViewParams().y;
+    }
+
 
     private class MoveAnimator implements Runnable {
         private Handler handler = new Handler(Looper.getMainLooper());
